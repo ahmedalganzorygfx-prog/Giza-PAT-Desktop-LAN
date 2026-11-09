@@ -1,0 +1,56 @@
+{
+  "name": "giza-pat-system-desktop",
+  "version": "1.1.0",
+  "description": "Giza PAT System - Desktop LAN Edition",
+  "main": "main.js",
+  "author": "Giza PAT Branch - Giza",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "server": "node server.js",
+    "dist": "electron-builder --win nsis",
+    "test:concurrency": "node tests/concurrency_test.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.8.1",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "electron": "^35.1.5",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "eg.pat.giza.desktop",
+    "productName": "Giza PAT System",
+    "asar": true,
+    "asarUnpack": [
+      "node_modules/better-sqlite3/**"
+    ],
+    "files": [
+      "**/*",
+      "!backups/**",
+      "!*.zip"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "Giza_PAT_System_Setup_${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Giza PAT System"
+    }
+  }
+}
